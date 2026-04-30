@@ -1,6 +1,6 @@
 import { Box, Container, Typography, Button } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import FavoriteIcon from '@mui/icons-material/Favorite';
+import HealthAndSafetyIcon from '@mui/icons-material/HealthAndSafety';
 
 const HeroSection = () => {
   const handleScroll = (href) => {
@@ -50,7 +50,7 @@ const HeroSection = () => {
           }}
         >
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 3 }}>
-            <FavoriteIcon sx={{ fontSize: 40 }} />
+            <HealthAndSafetyIcon sx={{ fontSize: 40 }} />
             <Typography variant="overline" sx={{ fontSize: '1rem', letterSpacing: 2 }}>
               Bienvenido a Valentía
             </Typography>

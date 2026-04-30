@@ -14,21 +14,29 @@ import {
   ListItemText,
   useTheme,
   useMediaQuery,
+  Tooltip,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
+import SelfImprovementIcon from '@mui/icons-material/SelfImprovement';
 import CloseIcon from '@mui/icons-material/Close';
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+import LoginIcon from '@mui/icons-material/Login';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const navigate = useNavigate();
+  const { isAdmin, user } = useAuth();
 
   const menuItems = [
     { label: 'Contacto', href: '#contacto' },
     { label: 'Reserva', href: '#reserva' },
     { label: 'Servicios', href: '#servicios' },
     { label: 'Sobre', href: '#sobre' },
+    { label: 'Ubicaciones', href: '#ubicaciones' },
     { label: 'Noticias y Recursos', href: '#noticias' },
   ];
 
@@ -69,7 +77,7 @@ const Header = () => {
         <Container maxWidth="lg">
           <Toolbar disableGutters sx={{ justifyContent: 'space-between' }}>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-              <LocalHospitalIcon sx={{ fontSize: 40, color: 'primary.main' }} />
+              <SelfImprovementIcon sx={{ fontSize: 40, color: 'primary.main' }} />
               <Typography
                 variant="h6"
                 component="div"
@@ -84,16 +92,26 @@ const Header = () => {
             </Box>
 
             {isMobile ? (
-              <IconButton
-                color="primary"
-                aria-label="open drawer"
-                edge="start"
-                onClick={handleDrawerToggle}
-              >
-                <MenuIcon />
-              </IconButton>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                <Tooltip title={isAdmin ? 'Panel Admin' : 'Iniciar sesión'}>
+                  <IconButton
+                    color="primary"
+                    onClick={() => navigate(isAdmin ? '/admin' : '/login')}
+                  >
+                    {isAdmin ? <AdminPanelSettingsIcon /> : <LoginIcon />}
+                  </IconButton>
+                </Tooltip>
+                <IconButton
+                  color="primary"
+                  aria-label="open drawer"
+                  edge="start"
+                  onClick={handleDrawerToggle}
+                >
+                  <MenuIcon />
+                </IconButton>
+              </Box>
             ) : (
-              <Box sx={{ display: 'flex', gap: 2 }}>
+              <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
                 {menuItems.map((item) => (
                   <Button
                     key={item.label}
@@ -101,15 +119,24 @@ const Header = () => {
                     sx={{
                       color: 'text.primary',
                       fontWeight: 500,
-                      '&:hover': {
-                        color: 'primary.main',
-                        bgcolor: 'transparent',
-                      },
+                      '&:hover': { color: 'primary.main', bgcolor: 'transparent' },
                     }}
                   >
                     {item.label}
                   </Button>
                 ))}
+                <Tooltip title={isAdmin ? 'Panel Admin' : user ? 'Mi cuenta' : 'Iniciar sesión'}>
+                  <IconButton
+                    color="primary"
+                    onClick={() => navigate(isAdmin ? '/admin' : '/login')}
+                    sx={{
+                      bgcolor: '#f0ecff',
+                      '&:hover': { bgcolor: '#e0d8ff' },
+                    }}
+                  >
+                    {isAdmin ? <AdminPanelSettingsIcon /> : <LoginIcon />}
+                  </IconButton>
+                </Tooltip>
               </Box>
             )}
           </Toolbar>

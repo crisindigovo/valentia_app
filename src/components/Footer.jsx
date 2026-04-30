@@ -6,10 +6,10 @@ import {
   IconButton,
   Link,
 } from "@mui/material";
-import LocalHospitalIcon from "@mui/icons-material/LocalHospital";
+import SelfImprovementIcon from "@mui/icons-material/SelfImprovement";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
-import XIcon from "@mui/icons-material/X";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
 
 const Footer = () => {
   const menuItems = [
@@ -17,7 +17,14 @@ const Footer = () => {
     { label: "Reserva", href: "#reserva" },
     { label: "Servicios", href: "#servicios" },
     { label: "Sobre", href: "#sobre" },
+    { label: "Ubicaciones", href: "#ubicaciones" },
     { label: "Noticias y Recursos", href: "#noticias" },
+  ];
+
+  // TODO: Actualizar con las direcciones reales
+  const locations = [
+    { name: "Sede Principal", address: "Actualizar dirección, Santiago" },
+    { name: "Sede Norte", address: "Actualizar dirección, Santiago" },
   ];
 
   const handleMenuClick = (href) => {
@@ -39,9 +46,9 @@ const Footer = () => {
     >
       <Container maxWidth="lg">
         <Grid container spacing={4}>
-          <Grid item xs={12} md={4}>
+          <Grid item xs={12} md={3}>
             <Box sx={{ display: "flex", alignItems: "center", gap: 1, mb: 2 }}>
-              <LocalHospitalIcon sx={{ fontSize: 40 }} />
+              <SelfImprovementIcon sx={{ fontSize: 40 }} />
               <Typography variant="h6" sx={{ fontWeight: 700 }}>
                 Centro de Rehabilitación Valentía
               </Typography>
@@ -52,7 +59,7 @@ const Footer = () => {
             </Typography>
           </Grid>
 
-          <Grid item xs={12} md={4}>
+          <Grid item xs={12} md={3}>
             <Typography variant="h6" sx={{ fontWeight: 600, mb: 2 }}>
               Enlaces
             </Typography>
@@ -79,7 +86,28 @@ const Footer = () => {
             </Box>
           </Grid>
 
-          <Grid item xs={12} md={4}>
+          <Grid item xs={12} md={3}>
+            <Typography variant="h6" sx={{ fontWeight: 600, mb: 2 }}>
+              Nuestras Sedes
+            </Typography>
+            <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+              {locations.map((loc) => (
+                <Box key={loc.name} sx={{ display: "flex", gap: 1, alignItems: "flex-start" }}>
+                  <LocationOnIcon sx={{ fontSize: 18, mt: 0.3, opacity: 0.8, flexShrink: 0 }} />
+                  <Box>
+                    <Typography variant="body2" sx={{ fontWeight: 600 }}>
+                      {loc.name}
+                    </Typography>
+                    <Typography variant="body2" sx={{ opacity: 0.85 }}>
+                      {loc.address}
+                    </Typography>
+                  </Box>
+                </Box>
+              ))}
+            </Box>
+          </Grid>
+
+          <Grid item xs={12} md={3}>
             <Typography variant="h6" sx={{ fontWeight: 600, mb: 2 }}>
               Síguenos
             </Typography>
@@ -88,9 +116,7 @@ const Footer = () => {
                 sx={{
                   color: "white",
                   bgcolor: "rgba(255,255,255,0.1)",
-                  "&:hover": {
-                    bgcolor: "rgba(255,255,255,0.2)",
-                  },
+                  "&:hover": { bgcolor: "rgba(255,255,255,0.2)" },
                 }}
                 onClick={() =>
                   window.open(
@@ -105,9 +131,7 @@ const Footer = () => {
                 sx={{
                   color: "white",
                   bgcolor: "rgba(255,255,255,0.1)",
-                  "&:hover": {
-                    bgcolor: "rgba(255,255,255,0.2)",
-                  },
+                  "&:hover": { bgcolor: "rgba(255,255,255,0.2)" },
                 }}
                 onClick={() =>
                   window.open(
@@ -118,17 +142,6 @@ const Footer = () => {
               >
                 <InstagramIcon />
               </IconButton>
-              {/* <IconButton
-                sx={{
-                  color: "white",
-                  bgcolor: "rgba(255,255,255,0.1)",
-                  "&:hover": {
-                    bgcolor: "rgba(255,255,255,0.2)",
-                  },
-                }}
-              >
-                <XIcon />
-              </IconButton> */}
             </Box>
           </Grid>
         </Grid>

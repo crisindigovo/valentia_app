@@ -12,6 +12,14 @@ dist
 dist-ssr
 *.local
 
+# Large media files
+*.mov
+*.mp4
+16-scaled_hroi5.jpg
+
+# Environment variables with real credentials
+.env
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
